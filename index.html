@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="نظام إدارة مدرسة المشاعل الأهلية للبنين - نظام دخول آمن للطلاب والمعلمين والإداريين">
+    <meta name="keywords" content="مدرسة, المشاعل, إدارة, نظام, طلاب, معلمين">
+    <meta name="author" content="مدرسة المشاعل الأهلية للبنين">
+    <title>نظام إدارة مدرسة المشاعل الأهلية - تسجيل الدخول</title>
+    
+    <!-- CSS Styles -->
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <!-- Security Headers -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; script-src 'self'">
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+</head>
+<body>
+    <!-- Loading Overlay -->
+    <div id="loading-overlay" class="loading-overlay hidden">
+        <div class="loading-spinner">
+            <i class="fas fa-spinner fa-spin"></i>
+            <p>جاري تسجيل الدخول...</p>
+        </div>
+    </div>
+
+    <!-- Login Page -->
+    <div id="login-page" class="page">
+        <div class="login-container">
+            <div class="login-card">
+                <div class="school-header">
+                    <div class="school-logo">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <h1>نظام إدارة مدرسة المشاعل الأهلية للبنين</h1>
+                    <p class="school-subtitle">Al-Mashael Private School for Boys</p>
+                    <p class="school-location">المملكة العربية السعودية</p>
+                </div>
+
+                <form id="login-form" class="login-form" novalidate>
+                    <div class="form-group">
+                        <label class="form-label">نوع المستخدم</label>
+                        <div class="user-type-selector">
+                            <label class="user-type-option">
+                                <input type="radio" name="userType" value="student" checked required aria-label="طالب">
+                                <div class="user-type-card">
+                                    <i class="fas fa-user-graduate"></i>
+                                    <span>طالب</span>
+                                </div>
+                            </label>
+                            
+                            <label class="user-type-option">
+                                <input type="radio" name="userType" value="teacher" required aria-label="معلم">
+                                <div class="user-type-card">
+                                    <i class="fas fa-chalkboard-teacher"></i>
+                                    <span>معلم</span>
+                                </div>
+                            </label>
+                            
+                            <label class="user-type-option">
+                                <input type="radio" name="userType" value="admin" required aria-label="إداري">
+                                <div class="user-type-card">
+                                    <i class="fas fa-user-cog"></i>
+                                    <span>إداري</span>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="username" class="form-label">اسم المستخدم</label>
+                        <div class="input-group">
+                            <i class="fas fa-user input-icon"></i>
+                            <input type="text" id="username" name="username" class="form-control" required 
+                                   autocomplete="username" maxlength="50" pattern="^[a-zA-Z0-9_]{3,50}$"
+                                   aria-describedby="username-error">
+                        </div>
+                        <div id="username-error" class="error-message" role="alert"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password" class="form-label">كلمة المرور</label>
+                        <div class="input-group">
+                            <i class="fas fa-lock input-icon"></i>
+                            <input type="password" id="password" name="password" class="form-control" required 
+                                   autocomplete="current-password" minlength="6" maxlength="100"
+                                   aria-describedby="password-error">
+                            <button type="button" class="password-toggle" onclick="togglePassword()" 
+                                    aria-label="إظهار/إخفاء كلمة المرور">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
+                        <div id="password-error" class="error-message" role="alert"></div>
+                    </div>
+
+                    <div class="form-options">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="rememberMe">
+                            <span class="checkmark"></span>
+                            تذكرني
+                        </label>
+                        <a href="#" class="forgot-password">نسيت كلمة المرور؟</a>
+                    </div>
+
+                    <button type="submit" class="btn btn--primary btn--full-width login-btn">
+                        <span class="btn-text">تسجيل الدخول</span>
+                        <div class="btn-spinner hidden">
+                            <i class="fas fa-spinner fa-spin"></i>
+                        </div>
+                    </button>
+                </form>
+
+                <!-- Demo credentials for testing (remove in production) -->
+                <div class="demo-credentials">
+                    <h4>بيانات تجريبية للاختبار:</h4>
+                    <p><strong>طالب:</strong> student1 / student123</p>
+                    <p><strong>معلم:</strong> teacher1 / teacher123</p>
+                    <p><strong>إداري:</strong> admin1 / admin123</p>
+                </div>
+
+                <div class="security-notice">
+                    <i class="fas fa-shield-alt"></i>
+                    <p>هذا النظام محمي بأحدث معايير الأمان الرقمي</p>
+                </div>
+            </div>
+        </div>
+
+        <footer class="login-footer">
+            <div class="footer-content">
+                <p>&copy; 2025 مدرسة المشاعل الأهلية للبنين. جميع الحقوق محفوظة.</p>
+                <div class="contact-info">
+                    <span><i class="fas fa-phone"></i> +966 11 234 5678</span>
+                    <span><i class="fas fa-envelope"></i> info@almashael.edu.sa</span>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Main Application -->
+    <div id="app-container" class="page">
+        <!-- Header -->
+        <header class="app-header">
+            <div class="header-content">
+                <div class="header-right">
+                    <button id="sidebar-toggle" class="btn btn--secondary btn--sm">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <div class="school-info">
+                        <h2>نظام إدارة مدرسة المشاعل الأهلية</h2>
+                    </div>
+                </div>
+                
+                <div class="header-left">
+                    <div class="theme-toggle">
+                        <button id="theme-toggle" class="btn btn--secondary btn--sm" aria-label="تبديل الثيم">
+                            <i class="fas fa-moon"></i>
+                        </button>
+                    </div>
+                    
+                    <div class="user-menu">
+                        <button class="user-avatar" onclick="toggleUserMenu()" aria-expanded="false" 
+                                aria-haspopup="true" aria-label="قائمة المستخدم">
+                            <i class="fas fa-user-circle"></i>
+                            <span id="user-name">المستخدم</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        
+                        <div id="user-dropdown" class="user-dropdown hidden" role="menu">
+                            <a href="#" onclick="showProfile()" role="menuitem">
+                                <i class="fas fa-user"></i> الملف الشخصي
+                            </a>
+                            <a href="#" onclick="changePassword()" role="menuitem">
+                                <i class="fas fa-key"></i> تغيير كلمة المرور
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <a href="#" onclick="logout()" role="menuitem">
+                                <i class="fas fa-sign-out-alt"></i> تسجيل الخروج
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <div class="app-layout">
+            <!-- Sidebar -->
+            <aside id="sidebar" class="sidebar">
+                <nav class="sidebar-nav" id="sidebar-nav" role="navigation">
+                    <!-- Navigation will be populated by JavaScript based on user role -->
+                </nav>
+            </aside>
+
+            <!-- Main Content -->
+            <main class="main-content" role="main">
+                <div class="breadcrumb" id="breadcrumb" aria-label="المسار الحالي">
+                    <!-- Breadcrumb will be populated by JavaScript -->
+                </div>
+                
+                <div id="page-content" class="page-content">
+                    <!-- Content will be loaded here -->
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Notification System -->
+    <div id="notification-container" class="notification-container" role="alert" aria-live="polite"></div>
+
+    <!-- Modal Container -->
+    <div id="modal-overlay" class="modal-overlay hidden" role="dialog" aria-modal="true">
+        <div id="modal-content" class="modal-content">
+            <!-- Modal content will be populated by JavaScript -->
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="app.js"></script>
+</body>
+</html>
