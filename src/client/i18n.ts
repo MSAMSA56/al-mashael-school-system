@@ -1,0 +1,426 @@
+export const translations = {
+  ar: {
+    // Navigation
+    nav: {
+      home: 'الرئيسية',
+      dashboard: 'لوحة التحكم',
+      assignments: 'الواجبات',
+      exams: 'الاختبارات',
+      schedule: 'الجدول الزمني',
+      attendance: 'الحضور',
+      messages: 'الرسائل',
+      meetings: 'الاجتماعات',
+      users: 'المستخدمون',
+      subjects: 'المواد',
+      classes: 'الفصول',
+      reports: 'التقارير',
+      settings: 'الإعدادات',
+      logout: 'تسجيل الخروج',
+      language: 'اللغة',
+    },
+
+    // Login Page
+    login: {
+      title: 'نظام إدارة مدرسة المشاعل',
+      subtitle: 'مدرسة المشاعل الأهلية للبنين',
+      email: 'البريد الإلكتروني',
+      password: 'كلمة المرور',
+      role: 'الدور',
+      selectRole: 'اختر الدور',
+      student: 'طالب',
+      teacher: 'معلم',
+      admin: 'إداري',
+      director: 'مدير',
+      login: 'تسجيل الدخول',
+      loginButton: 'دخول',
+      forgotPassword: 'هل نسيت كلمة المرور؟',
+      invalidCredentials: 'بيانات دخول غير صحيحة',
+      error: 'حدث خطأ ما',
+      demoAccounts: 'حسابات تجريبية',
+      demoPassword: 'كلمة المرور: password123',
+    },
+
+    // Dashboard
+    dashboard: {
+      welcome: 'مرحباً',
+      studentDashboard: 'لوحة تحكم الطالب',
+      teacherDashboard: 'لوحة تحكم المعلم',
+      adminDashboard: 'لوحة تحكم الإداري',
+      directorDashboard: 'لوحة تحكم المدير',
+      overview: 'نظرة عامة',
+      recentActivities: 'الأنشطة الأخيرة',
+      statistics: 'الإحصائيات',
+      totalAssignments: 'إجمالي الواجبات',
+      completedAssignments: 'الواجبات المكتملة',
+      pendingAssignments: 'الواجبات المعلقة',
+      totalExams: 'إجمالي الاختبارات',
+      completedExams: 'الاختبارات المكتملة',
+      attendanceRate: 'نسبة الحضور',
+      presentDays: 'أيام الحضور',
+      absentDays: 'أيام الغياب',
+      lateDays: 'أيام التأخر',
+    },
+
+    // Assignments
+    assignments: {
+      title: 'الواجبات',
+      create: 'إنشاء واجبة',
+      edit: 'تعديل',
+      delete: 'حذف',
+      submit: 'تسليم',
+      submitted: 'مُسلّم',
+      pending: 'قيد الانتظار',
+      dueDate: 'تاريخ التسليم',
+      description: 'الوصف',
+      subject: 'المادة',
+      class: 'الفصل',
+      submittedBy: 'مُسلّم بواسطة',
+      grade: 'الدرجة',
+      noAssignments: 'لا توجد واجبات',
+    },
+
+    // Exams
+    exams: {
+      title: 'الاختبارات',
+      create: 'إنشاء اختبار',
+      edit: 'تعديل',
+      delete: 'حذف',
+      startDate: 'تاريخ البداية',
+      endDate: 'تاريخ النهاية',
+      completed: 'مكتمل',
+      notStarted: 'لم يبدأ',
+      inProgress: 'قيد الإجراء',
+      score: 'الدرجة',
+      noExams: 'لا توجد اختبارات',
+    },
+
+    // Schedule
+    schedule: {
+      title: 'الجدول الزمني',
+      upload: 'تحميل الجدول',
+      day: 'اليوم',
+      time: 'الوقت',
+      subject: 'المادة',
+      teacher: 'المعلم',
+      room: 'الفصل',
+      noSchedule: 'لا يوجد جدول زمني',
+      zoomIn: 'تكبير',
+      zoomOut: 'تصغير',
+    },
+
+    // Attendance
+    attendance: {
+      title: 'الحضور والغياب',
+      date: 'التاريخ',
+      status: 'الحالة',
+      present: 'حاضر',
+      absent: 'غائب',
+      late: 'متأخر',
+      record: 'تسجيل',
+      recordAttendance: 'تسجيل الحضور',
+      noAttendance: 'لا توجد بيانات حضور',
+    },
+
+    // Messages
+    messages: {
+      title: 'الرسائل',
+      send: 'إرسال',
+      compose: 'كتابة رسالة',
+      to: 'إلى',
+      subject: 'الموضوع',
+      message: 'الرسالة',
+      sent: 'مُرسل',
+      received: 'مُستقبل',
+      noMessages: 'لا توجد رسائل',
+    },
+
+    // Meetings
+    meetings: {
+      title: 'الاجتماعات',
+      schedule: 'جدولة اجتماع',
+      date: 'التاريخ',
+      time: 'الوقت',
+      attendees: 'الحاضرون',
+      link: 'رابط الاجتماع',
+      description: 'الوصف',
+      noMeetings: 'لا توجد اجتماعات',
+    },
+
+    // Users
+    users: {
+      title: 'المستخدمون',
+      create: 'إضافة مستخدم',
+      edit: 'تعديل',
+      delete: 'حذف',
+      name: 'الاسم',
+      email: 'البريد الإلكتروني',
+      role: 'الدور',
+      phone: 'رقم الهاتف',
+      noUsers: 'لا يوجد مستخدمون',
+    },
+
+    // Subjects
+    subjects: {
+      title: 'المواد',
+      create: 'إضافة مادة',
+      edit: 'تعديل',
+      delete: 'حذف',
+      name: 'اسم المادة',
+      code: 'الرمز',
+      description: 'الوصف',
+      noSubjects: 'لا توجد مواد',
+    },
+
+    // Classes
+    classes: {
+      title: 'الفصول',
+      create: 'إضافة فصل',
+      edit: 'تعديل',
+      delete: 'حذف',
+      name: 'اسم الفصل',
+      grade: 'المرحلة',
+      capacity: 'السعة',
+      noClasses: 'لا توجد فصول',
+    },
+
+    // Common
+    common: {
+      save: 'حفظ',
+      cancel: 'إلغاء',
+      delete: 'حذف',
+      edit: 'تعديل',
+      add: 'إضافة',
+      close: 'إغلاق',
+      back: 'رجوع',
+      next: 'التالي',
+      previous: 'السابق',
+      search: 'بحث',
+      filter: 'تصفية',
+      sort: 'ترتيب',
+      loading: 'جاري التحميل...',
+      error: 'حدث خطأ',
+      success: 'تم بنجاح',
+      confirm: 'تأكيد',
+      yes: 'نعم',
+      no: 'لا',
+      settings: 'الإعدادات',
+      theme: 'المظهر',
+      dark: 'داكن',
+      light: 'فاتح',
+    },
+  },
+
+  en: {
+    // Navigation
+    nav: {
+      home: 'Home',
+      dashboard: 'Dashboard',
+      assignments: 'Assignments',
+      exams: 'Exams',
+      schedule: 'Schedule',
+      attendance: 'Attendance',
+      messages: 'Messages',
+      meetings: 'Meetings',
+      users: 'Users',
+      subjects: 'Subjects',
+      classes: 'Classes',
+      reports: 'Reports',
+      settings: 'Settings',
+      logout: 'Logout',
+      language: 'Language',
+    },
+
+    // Login Page
+    login: {
+      title: 'Al-Mashael School Management System',
+      subtitle: 'Al-Mashael Private School for Boys',
+      email: 'Email',
+      password: 'Password',
+      role: 'Role',
+      selectRole: 'Select Role',
+      student: 'Student',
+      teacher: 'Teacher',
+      admin: 'Admin',
+      director: 'Director',
+      login: 'Login',
+      loginButton: 'Sign In',
+      forgotPassword: 'Forgot Password?',
+      invalidCredentials: 'Invalid credentials',
+      error: 'An error occurred',
+      demoAccounts: 'Demo Accounts',
+      demoPassword: 'Password: password123',
+    },
+
+    // Dashboard
+    dashboard: {
+      welcome: 'Welcome',
+      studentDashboard: 'Student Dashboard',
+      teacherDashboard: 'Teacher Dashboard',
+      adminDashboard: 'Admin Dashboard',
+      directorDashboard: 'Director Dashboard',
+      overview: 'Overview',
+      recentActivities: 'Recent Activities',
+      statistics: 'Statistics',
+      totalAssignments: 'Total Assignments',
+      completedAssignments: 'Completed Assignments',
+      pendingAssignments: 'Pending Assignments',
+      totalExams: 'Total Exams',
+      completedExams: 'Completed Exams',
+      attendanceRate: 'Attendance Rate',
+      presentDays: 'Present Days',
+      absentDays: 'Absent Days',
+      lateDays: 'Late Days',
+    },
+
+    // Assignments
+    assignments: {
+      title: 'Assignments',
+      create: 'Create Assignment',
+      edit: 'Edit',
+      delete: 'Delete',
+      submit: 'Submit',
+      submitted: 'Submitted',
+      pending: 'Pending',
+      dueDate: 'Due Date',
+      description: 'Description',
+      subject: 'Subject',
+      class: 'Class',
+      submittedBy: 'Submitted By',
+      grade: 'Grade',
+      noAssignments: 'No assignments',
+    },
+
+    // Exams
+    exams: {
+      title: 'Exams',
+      create: 'Create Exam',
+      edit: 'Edit',
+      delete: 'Delete',
+      startDate: 'Start Date',
+      endDate: 'End Date',
+      completed: 'Completed',
+      notStarted: 'Not Started',
+      inProgress: 'In Progress',
+      score: 'Score',
+      noExams: 'No exams',
+    },
+
+    // Schedule
+    schedule: {
+      title: 'Schedule',
+      upload: 'Upload Schedule',
+      day: 'Day',
+      time: 'Time',
+      subject: 'Subject',
+      teacher: 'Teacher',
+      room: 'Room',
+      noSchedule: 'No schedule',
+      zoomIn: 'Zoom In',
+      zoomOut: 'Zoom Out',
+    },
+
+    // Attendance
+    attendance: {
+      title: 'Attendance',
+      date: 'Date',
+      status: 'Status',
+      present: 'Present',
+      absent: 'Absent',
+      late: 'Late',
+      record: 'Record',
+      recordAttendance: 'Record Attendance',
+      noAttendance: 'No attendance data',
+    },
+
+    // Messages
+    messages: {
+      title: 'Messages',
+      send: 'Send',
+      compose: 'Compose Message',
+      to: 'To',
+      subject: 'Subject',
+      message: 'Message',
+      sent: 'Sent',
+      received: 'Received',
+      noMessages: 'No messages',
+    },
+
+    // Meetings
+    meetings: {
+      title: 'Meetings',
+      schedule: 'Schedule Meeting',
+      date: 'Date',
+      time: 'Time',
+      attendees: 'Attendees',
+      link: 'Meeting Link',
+      description: 'Description',
+      noMeetings: 'No meetings',
+    },
+
+    // Users
+    users: {
+      title: 'Users',
+      create: 'Add User',
+      edit: 'Edit',
+      delete: 'Delete',
+      name: 'Name',
+      email: 'Email',
+      role: 'Role',
+      phone: 'Phone',
+      noUsers: 'No users',
+    },
+
+    // Subjects
+    subjects: {
+      title: 'Subjects',
+      create: 'Add Subject',
+      edit: 'Edit',
+      delete: 'Delete',
+      name: 'Subject Name',
+      code: 'Code',
+      description: 'Description',
+      noSubjects: 'No subjects',
+    },
+
+    // Classes
+    classes: {
+      title: 'Classes',
+      create: 'Add Class',
+      edit: 'Edit',
+      delete: 'Delete',
+      name: 'Class Name',
+      grade: 'Grade',
+      capacity: 'Capacity',
+      noClasses: 'No classes',
+    },
+
+    // Common
+    common: {
+      save: 'Save',
+      cancel: 'Cancel',
+      delete: 'Delete',
+      edit: 'Edit',
+      add: 'Add',
+      close: 'Close',
+      back: 'Back',
+      next: 'Next',
+      previous: 'Previous',
+      search: 'Search',
+      filter: 'Filter',
+      sort: 'Sort',
+      loading: 'Loading...',
+      error: 'Error',
+      success: 'Success',
+      confirm: 'Confirm',
+      yes: 'Yes',
+      no: 'No',
+      settings: 'Settings',
+      theme: 'Theme',
+      dark: 'Dark',
+      light: 'Light',
+    },
+  },
+};
+
+export type Language = 'ar' | 'en';
+export type TranslationKey = keyof typeof translations.ar;
