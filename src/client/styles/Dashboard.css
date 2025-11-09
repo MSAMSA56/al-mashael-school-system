@@ -1,0 +1,703 @@
+.dashboard {
+  display: flex;
+  height: calc(100vh - 60px);
+  background-color: var(--bg);
+}
+
+.dashboard-container {
+  display: flex;
+  width: 100%;
+  gap: 0;
+}
+
+.dashboard-sidebar {
+  width: 250px;
+  background-color: var(--card);
+  border-left: 1px solid var(--border);
+  padding: 1.5rem 0;
+  overflow-y: auto;
+  position: sticky;
+  top: 60px;
+  height: calc(100vh - 60px);
+}
+
+.sidebar-header {
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 1rem;
+}
+
+.sidebar-header h2 {
+  font-size: 1.1rem;
+  margin-bottom: 0.25rem;
+  color: var(--primary);
+}
+
+.sidebar-header p {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+.nav-list {
+  list-style: none;
+}
+
+.nav-btn {
+  width: 100%;
+  padding: 0.75rem 1.5rem;
+  background: none;
+  border: none;
+  border-right: 3px solid transparent;
+  color: var(--text-secondary);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.95rem;
+  transition: all 0.3s;
+  text-align: right;
+}
+
+.nav-btn:hover {
+  background-color: var(--bg-secondary);
+  color: var(--text);
+}
+
+.nav-btn.active {
+  background-color: var(--bg-secondary);
+  border-right-color: var(--primary);
+  color: var(--primary);
+  font-weight: 600;
+}
+
+.dashboard-main {
+  flex: 1;
+  overflow-y: auto;
+  padding: 2rem;
+}
+
+.tab-content {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.tab-content h1 {
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+  color: var(--text);
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.stat-card {
+  background-color: var(--card);
+  padding: 1.5rem;
+  border-radius: 0.75rem;
+  border: 1px solid var(--border);
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  transition: all 0.3s;
+}
+
+.stat-card:hover {
+  border-color: var(--primary);
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.1);
+}
+
+.stat-icon {
+  font-size: 2rem;
+  width: 3rem;
+  height: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--bg-secondary);
+  border-radius: 0.5rem;
+}
+
+.stat-info h3 {
+  font-size: 1.5rem;
+  margin-bottom: 0.25rem;
+  color: var(--text);
+}
+
+.stat-info p {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+.form-card {
+  background-color: var(--card);
+  padding: 1.5rem;
+  border-radius: 0.75rem;
+  border: 1px solid var(--border);
+  margin-bottom: 2rem;
+}
+
+.form-card h2 {
+  margin-bottom: 1.5rem;
+  color: var(--text);
+}
+
+.form-group {
+  margin-bottom: 1rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: var(--text);
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid var(--border);
+  border-radius: 0.5rem;
+  background-color: var(--bg-secondary);
+  color: var(--text);
+  font-family: inherit;
+  transition: all 0.3s;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1rem;
+}
+
+.btn-primary {
+  padding: 0.75rem 1.5rem;
+  background: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%);
+  color: white;
+  border: none;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(37, 99, 235, 0.3);
+}
+
+.btn-secondary {
+  padding: 0.75rem 1.5rem;
+  background-color: var(--bg-secondary);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 0.5rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.btn-secondary:hover {
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
+.items-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.item-card {
+  background-color: var(--card);
+  padding: 1.5rem;
+  border-radius: 0.75rem;
+  border: 1px solid var(--border);
+  transition: all 0.3s;
+}
+
+.item-card:hover {
+  border-color: var(--primary);
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.1);
+}
+
+.item-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1rem;
+  gap: 1rem;
+}
+
+.item-header h3 {
+  color: var(--text);
+  font-size: 1.1rem;
+}
+
+.status-badge {
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.status-badge.submitted,
+.status-badge.completed {
+  background-color: #d1fae5;
+  color: #065f46;
+}
+
+.status-badge.pending {
+  background-color: #fef3c7;
+  color: #92400e;
+}
+
+.item-description {
+  color: var(--text-secondary);
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+}
+
+.item-meta {
+  background-color: var(--bg-secondary);
+  padding: 1rem;
+  border-radius: 0.5rem;
+  margin-bottom: 1rem;
+  font-size: 0.85rem;
+}
+
+.item-meta p {
+  margin-bottom: 0.5rem;
+  color: var(--text-secondary);
+}
+
+.item-meta strong {
+  color: var(--text);
+}
+
+.item-link {
+  display: inline-block;
+  color: var(--primary);
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.3s;
+}
+
+.item-link:hover {
+  color: var(--primary-dark);
+  text-decoration: underline;
+}
+
+.messages-list {
+  display: grid;
+  gap: 1rem;
+}
+
+.message-item {
+  background-color: var(--card);
+  padding: 1.5rem;
+  border-radius: 0.75rem;
+  border: 1px solid var(--border);
+}
+
+.message-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.75rem;
+}
+
+.message-header h4 {
+  color: var(--text);
+}
+
+.message-date {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+}
+
+.message-subject {
+  color: var(--text-secondary);
+  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
+}
+
+.message-content {
+  color: var(--text);
+  line-height: 1.6;
+}
+
+.teachers-grid,
+.students-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 1.5rem;
+}
+
+.teacher-card,
+.student-card {
+  background-color: var(--card);
+  padding: 1.5rem;
+  border-radius: 0.75rem;
+  border: 1px solid var(--border);
+  text-align: center;
+  transition: all 0.3s;
+}
+
+.teacher-card:hover,
+.student-card:hover {
+  border-color: var(--primary);
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.1);
+}
+
+.teacher-avatar,
+.student-avatar {
+  width: 4rem;
+  height: 4rem;
+  margin: 0 auto 1rem;
+  border-radius: 50%;
+  overflow: hidden;
+  background-color: var(--bg-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+}
+
+.teacher-avatar img,
+.student-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.avatar-placeholder {
+  font-size: 2rem;
+}
+
+.teacher-card h3,
+.student-card h3 {
+  color: var(--text);
+  margin-bottom: 0.5rem;
+}
+
+.teacher-specialization,
+.student-class {
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+  margin-bottom: 1rem;
+}
+
+.teacher-contact,
+.student-actions {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+}
+
+.contact-btn,
+.action-btn {
+  padding: 0.5rem 1rem;
+  background-color: var(--primary);
+  color: white;
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  font-size: 0.85rem;
+  transition: all 0.3s;
+}
+
+.contact-btn:hover,
+.action-btn:hover {
+  background-color: var(--primary-dark);
+}
+
+.schedule-container {
+  background-color: var(--card);
+  padding: 1.5rem;
+  border-radius: 0.75rem;
+  border: 1px solid var(--border);
+}
+
+.schedule-viewer {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.schedule-controls {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  justify-content: center;
+}
+
+.schedule-controls button {
+  padding: 0.5rem 1rem;
+  background-color: var(--primary);
+  color: white;
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.schedule-controls button:hover {
+  background-color: var(--primary-dark);
+}
+
+.schedule-image-wrapper {
+  overflow: auto;
+  max-height: 500px;
+  border: 1px solid var(--border);
+  border-radius: 0.5rem;
+  padding: 1rem;
+  background-color: var(--bg-secondary);
+  transform-origin: center top;
+  transition: transform 0.3s;
+}
+
+.schedule-image-wrapper img {
+  width: 100%;
+  height: auto;
+  border-radius: 0.5rem;
+}
+
+.schedule-placeholder {
+  text-align: center;
+  padding: 3rem;
+  color: var(--text-secondary);
+}
+
+.empty-message {
+  text-align: center;
+  padding: 2rem;
+  color: var(--text-secondary);
+  background-color: var(--card);
+  border-radius: 0.75rem;
+  border: 1px solid var(--border);
+}
+
+.dashboard-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: calc(100vh - 60px);
+  color: var(--text-secondary);
+}
+
+/* Director Styles */
+.director-sidebar {
+  background: linear-gradient(135deg, var(--card) 0%, var(--bg-secondary) 100%);
+}
+
+.director-header {
+  position: relative;
+  padding-left: 3.5rem;
+}
+
+.director-badge {
+  position: absolute;
+  left: 1rem;
+  top: 1rem;
+  font-size: 1.5rem;
+}
+
+.director-stat {
+  border-left: 3px solid var(--primary);
+}
+
+.director-form {
+  background: linear-gradient(135deg, var(--card) 0%, var(--bg-secondary) 100%);
+}
+
+.form-actions {
+  display: flex;
+  gap: 1rem;
+}
+
+.meetings-list {
+  margin-top: 2rem;
+}
+
+.meetings-list h2 {
+  margin-bottom: 1rem;
+  color: var(--text);
+}
+
+.meeting-item {
+  background-color: var(--card);
+  padding: 1.5rem;
+  border-radius: 0.75rem;
+  border: 1px solid var(--border);
+  margin-bottom: 1rem;
+  transition: all 0.3s;
+}
+
+.meeting-item:hover {
+  border-color: var(--primary);
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.1);
+}
+
+.meeting-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.75rem;
+  gap: 1rem;
+}
+
+.meeting-header h3 {
+  color: var(--text);
+}
+
+.meeting-date {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  white-space: nowrap;
+}
+
+.meeting-description {
+  color: var(--text-secondary);
+  margin-bottom: 0.75rem;
+  font-size: 0.9rem;
+}
+
+.meeting-organizer {
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+}
+
+.schedule-upload {
+  background-color: var(--card);
+  padding: 1.5rem;
+  border-radius: 0.75rem;
+  border: 2px dashed var(--border);
+  text-align: center;
+}
+
+.schedule-upload input {
+  margin-bottom: 1rem;
+}
+
+.analytics-placeholder,
+.reports-placeholder,
+.settings-placeholder {
+  background-color: var(--card);
+  padding: 2rem;
+  border-radius: 0.75rem;
+  border: 1px solid var(--border);
+  text-align: center;
+  color: var(--text-secondary);
+}
+
+.users-list {
+  display: grid;
+  gap: 1rem;
+}
+
+.user-item {
+  background-color: var(--card);
+  padding: 1rem;
+  border-radius: 0.5rem;
+  border: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.user-item h4 {
+  color: var(--text);
+  margin-bottom: 0.25rem;
+}
+
+.user-item p {
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+}
+
+.role-badge {
+  padding: 0.25rem 0.75rem;
+  background-color: var(--primary);
+  color: white;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .dashboard-container {
+    flex-direction: column;
+  }
+
+  .dashboard-sidebar {
+    width: 100%;
+    height: auto;
+    position: relative;
+    top: 0;
+    border-left: none;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  }
+
+  .nav-btn {
+    padding: 0.5rem;
+    font-size: 0.8rem;
+    border-right: none;
+    border-bottom: 3px solid transparent;
+  }
+
+  .nav-btn.active {
+    border-right: none;
+    border-bottom-color: var(--primary);
+  }
+
+  .dashboard-main {
+    padding: 1rem;
+  }
+
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .items-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .teachers-grid,
+  .students-grid {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  }
+
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+
+  .role-selection {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .demo-accounts-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

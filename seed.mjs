@@ -1,0 +1,158 @@
+import { Pool } from 'pg';
+import bcryptjs from 'bcryptjs';
+
+const pool = new Pool({
+  connectionString: process.env.DATABASE_URL || 'postgresql://postgres:password@localhost:5432/al_mashael_school',
+});
+
+async function seed() {
+  try {
+    console.log('🌱 بدء ملء قاعدة البيانات...');
+
+    // Create users
+    const users = [
+      {
+        email: 'ahmed@almashaeel.edu.sa',
+        password: await bcryptjs.hash('password123', 10),
+        firstName: 'أحمد',
+        lastName: 'محمد',
+        role: 'student',
+        phone: '0501234567',
+      },
+      {
+        email: 'khalid@almashaeel.edu.sa',
+        password: await bcryptjs.hash('password123', 10),
+        firstName: 'خالد',
+        lastName: 'علي',
+        role: 'teacher',
+        phone: '0502345678',
+      },
+      {
+        email: 'admin@almashaeel.edu.sa',
+        password: await bcryptjs.hash('password123', 10),
+        firstName: 'محمد',
+        lastName: 'الإدارة',
+        role: 'admin',
+        phone: '0503456789',
+      },
+      {
+        email: 'director@almashaeel.edu.sa',
+        password: await bcryptjs.hash('password123', 10),
+        firstName: 'عبدالله',
+        lastName: 'المدير',
+        role: 'director',
+        phone: '0504567890',
+      },
+    ];
+
+    console.log('📝 إنشاء المستخدمين...');
+    const userResults = [];
+    for (const user of users) {
+      const result = await pool.query(
+        'INSERT INTO users (email, password, first_name, last_name, role, phone) VALUES ($1, $2, $3, $4, $5, $6) RETURNING id',
+        [user.email, user.password, user.firstName, user.lastName, user.role, user.phone]
+      );
+      userResults.push({ ...user, id: result.rows[0].id });
+    }
+
+    // Create student
+    console.log('👨‍🎓 إنشاء الطلاب...');
+    const studentUser = userResults.find(u => u.role === 'student');
+    await pool.query(
+      'INSERT INTO students (user_id, student_id, grade, class) VALUES ($1, $2, $3, $4)',
+      [studentUser.id, 'STU001', 'first_secondary', 'أول ثانوي - أ']
+    );
+
+    // Create teacher
+    console.log('👨‍🏫 إنشاء المعلمين...');
+    const teacherUser = userResults.find(u => u.role === 'teacher');
+    await pool.query(
+      'INSERT INTO teachers (user_id, teacher_id, specialization) VALUES ($1, $2, $3)',
+      [teacherUser.id, 'TCH001', 'الرياضيات']
+    );
+
+    // Create classes
+    console.log('📚 إنشاء الفصول...');
+    const classes = [
+      { name: 'أول ثانوي - أ', grade: 'first_secondary', capacity: 30 },
+      { name: 'أول ثانوي - ب', grade: 'first_secondary', capacity: 30 },
+      { name: 'ثاني ثانوي - أ', grade: 'second_secondary', capacity: 30 },
+      { name: 'ثالث ثانوي - أ', grade: 'third_secondary', capacity: 30 },
+    ];
+
+    const classResults = [];
+    for (const cls of classes) {
+      const result = await pool.query(
+        'INSERT INTO classes (name, grade, capacity) VALUES ($1, $2, $3) RETURNING id',
+        [cls.name, cls.grade, cls.capacity]
+      );
+      classResults.push({ ...cls, id: result.rows[0].id });
+    }
+
+    // Create subjects
+    console.log('📖 إنشاء المواد الدراسية...');
+    const subjects = [
+      { name: 'الرياضيات', code: 'MATH101', description: 'مادة الرياضيات' },
+      { name: 'اللغة العربية', code: 'ARAB101', description: 'مادة اللغة العربية' },
+      { name: 'العلوم', code: 'SCI101', description: 'مادة العلوم' },
+      { name: 'اللغة الإنجليزية', code: 'ENG101', description: 'مادة اللغة الإنجليزية' },
+      { name: 'الدراسات الاجتماعية', code: 'SOC101', description: 'مادة الدراسات الاجتماعية' },
+    ];
+
+    const subjectResults = [];
+    for (const subject of subjects) {
+      const result = await pool.query(
+        'INSERT INTO subjects (name, code, description) VALUES ($1, $2, $3) RETURNING id',
+        [subject.name, subject.code, subject.description]
+      );
+      subjectResults.push({ ...subject, id: result.rows[0].id });
+    }
+
+    // Create teacher subjects
+    console.log('🔗 ربط المعلمين بالمواد...');
+    const teacherResult = userResults.find(u => u.role === 'teacher');
+    const mathSubject = subjectResults.find(s => s.code === 'MATH101');
+    const firstClass = classResults[0];
+
+    if (teacherResult && mathSubject && firstClass) {
+      const teacherDbResult = await pool.query('SELECT id FROM teachers WHERE user_id = $1', [teacherResult.id]);
+      if (teacherDbResult.rows.length > 0) {
+        await pool.query(
+          'INSERT INTO teacher_subjects (teacher_id, subject_id, class_id) VALUES ($1, $2, $3)',
+          [teacherDbResult.rows[0].id, mathSubject.id, firstClass.id]
+        );
+      }
+    }
+
+    // Create schedules
+    console.log('📅 إنشاء الجداول الزمنية...');
+    const teacherDbResult = await pool.query('SELECT id FROM teachers WHERE user_id = $1', [teacherResult.id]);
+    if (teacherDbResult.rows.length > 0 && mathSubject && firstClass) {
+      const days = ['السبت', 'الأحد', 'الاثنين', 'الثلاثاء', 'الأربعاء'];
+      for (let i = 0; i < days.length; i++) {
+        await pool.query(
+          'INSERT INTO schedules (class_id, teacher_id, subject_id, day_of_week, start_time, end_time) VALUES ($1, $2, $3, $4, $5, $6)',
+          [firstClass.id, teacherDbResult.rows[0].id, mathSubject.id, days[i], '08:00', '09:00']
+        );
+      }
+    }
+
+    console.log('✅ تم ملء قاعدة البيانات بنجاح!');
+    console.log('\n📋 حسابات تجريبية:');
+    console.log('┌─────────────────────────────────────────┐');
+    console.log('│ الدور     │ البريد الإلكتروني         │ كلمة المرور │');
+    console.log('├─────────────────────────────────────────┤');
+    console.log('│ طالب     │ ahmed@almashaeel.edu.sa   │ password123 │');
+    console.log('│ معلم     │ khalid@almashaeel.edu.sa  │ password123 │');
+    console.log('│ إداري    │ admin@almashaeel.edu.sa   │ password123 │');
+    console.log('│ مدير     │ director@almashaeel.edu.sa│ password123 │');
+    console.log('└─────────────────────────────────────────┘');
+
+    process.exit(0);
+  } catch (error) {
+    console.error('❌ خطأ أثناء ملء قاعدة البيانات:', error);
+    process.exit(1);
+  }
+}
+
+seed();
