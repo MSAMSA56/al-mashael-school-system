@@ -17,11 +17,11 @@
 - [x] إضافة دعم اللغة العربية
 
 ## المرحلة 3: تحويل قاعدة البيانات إلى MySQL
-- [ ] تحديث drizzle.config.ts للـ MySQL
-- [ ] تحديث schema.ts للـ MySQL
-- [ ] تثبيت mysql2 و drizzle-orm
-- [ ] نقل البيانات من SQLite إلى MySQL
-- [ ] اختبار الاتصال بقاعدة البيانات الجديدة
+- [x] تحديث drizzle.config.ts للـ MySQL
+- [x] تحديث schema.ts للـ MySQL
+- [x] تثبيت mysql2 و drizzle-orm
+- [x] تحديث .env للـ MySQL
+- [x] تحديث package.json للـ MySQL
 
 ## المرحلة 4: الميزات المتقدمة
 - [ ] نظام تحميل الصور للجداول الزمنية
