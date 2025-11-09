@@ -6,8 +6,8 @@ dotenv.config();
 export default {
   schema: './src/db/schema.ts',
   out: './drizzle',
-  driver: 'pg',
+  driver: 'mysql2',
   dbCredentials: {
-    connectionString: process.env.DATABASE_URL || 'postgresql://postgres:password@localhost:5432/al_mashael_school',
+    connectionString: process.env.DATABASE_URL || 'mysql://root:password@localhost:3306/al_mashael_school',
   },
 } satisfies Config;

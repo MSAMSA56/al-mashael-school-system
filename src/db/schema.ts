@@ -1,14 +1,14 @@
-import { pgTable, serial, text, varchar, integer, timestamp, boolean, decimal, enum as pgEnum } from 'drizzle-orm/pg-core';
+import { mysqlTable, int, text, varchar, timestamp, boolean, decimal, mysqlEnum } from 'drizzle-orm/mysql-core';
 import { relations } from 'drizzle-orm';
 
 // Enums
-export const roleEnum = pgEnum('role', ['student', 'teacher', 'admin', 'director']);
-export const gradeEnum = pgEnum('grade', ['first_secondary', 'second_secondary', 'third_secondary', 'first_intermediate', 'second_intermediate', 'third_intermediate']);
-export const attendanceStatusEnum = pgEnum('attendance_status', ['present', 'absent', 'late']);
+export const roleEnum = mysqlEnum('role', ['student', 'teacher', 'admin', 'director']);
+export const gradeEnum = mysqlEnum('grade', ['first_secondary', 'second_secondary', 'third_secondary', 'first_intermediate', 'second_intermediate', 'third_intermediate']);
+export const attendanceStatusEnum = mysqlEnum('attendance_status', ['present', 'absent', 'late']);
 
 // Users Table
-export const users = pgTable('users', {
-  id: serial('id').primaryKey(),
+export const users = mysqlTable('users', {
+  id: int('id').autoincrement().primaryKey(),
   email: varchar('email', { length: 255 }).unique().notNull(),
   password: varchar('password', { length: 255 }).notNull(),
   firstName: varchar('first_name', { length: 100 }).notNull(),
@@ -18,13 +18,13 @@ export const users = pgTable('users', {
   profileImage: text('profile_image'),
   isActive: boolean('is_active').default(true),
   createdAt: timestamp('created_at').defaultNow(),
-  updatedAt: timestamp('updated_at').defaultNow(),
+  updatedAt: timestamp('updated_at').defaultNow().onUpdateNow(),
 });
 
 // Students Table
-export const students = pgTable('students', {
-  id: serial('id').primaryKey(),
-  userId: integer('user_id').references(() => users.id).notNull(),
+export const students = mysqlTable('students', {
+  id: int('id').autoincrement().primaryKey(),
+  userId: int('user_id').references(() => users.id).notNull(),
   studentId: varchar('student_id', { length: 50 }).unique().notNull(),
   grade: gradeEnum('grade').notNull(),
   class: varchar('class', { length: 50 }).notNull(),
@@ -32,17 +32,17 @@ export const students = pgTable('students', {
 });
 
 // Teachers Table
-export const teachers = pgTable('teachers', {
-  id: serial('id').primaryKey(),
-  userId: integer('user_id').references(() => users.id).notNull(),
+export const teachers = mysqlTable('teachers', {
+  id: int('id').autoincrement().primaryKey(),
+  userId: int('user_id').references(() => users.id).notNull(),
   teacherId: varchar('teacher_id', { length: 50 }).unique().notNull(),
   specialization: varchar('specialization', { length: 100 }).notNull(),
   joinDate: timestamp('join_date').defaultNow(),
 });
 
 // Subjects Table
-export const subjects = pgTable('subjects', {
-  id: serial('id').primaryKey(),
+export const subjects = mysqlTable('subjects', {
+  id: int('id').autoincrement().primaryKey(),
   name: varchar('name', { length: 100 }).notNull(),
   code: varchar('code', { length: 20 }).unique().notNull(),
   description: text('description'),
@@ -50,28 +50,28 @@ export const subjects = pgTable('subjects', {
 });
 
 // Classes Table
-export const classes = pgTable('classes', {
-  id: serial('id').primaryKey(),
+export const classes = mysqlTable('classes', {
+  id: int('id').autoincrement().primaryKey(),
   name: varchar('name', { length: 50 }).notNull(),
   grade: gradeEnum('grade').notNull(),
-  capacity: integer('capacity'),
+  capacity: int('capacity'),
   createdAt: timestamp('created_at').defaultNow(),
 });
 
 // Teacher Subjects (Many-to-Many)
-export const teacherSubjects = pgTable('teacher_subjects', {
-  id: serial('id').primaryKey(),
-  teacherId: integer('teacher_id').references(() => teachers.id).notNull(),
-  subjectId: integer('subject_id').references(() => subjects.id).notNull(),
-  classId: integer('class_id').references(() => classes.id).notNull(),
+export const teacherSubjects = mysqlTable('teacher_subjects', {
+  id: int('id').autoincrement().primaryKey(),
+  teacherId: int('teacher_id').references(() => teachers.id).notNull(),
+  subjectId: int('subject_id').references(() => subjects.id).notNull(),
+  classId: int('class_id').references(() => classes.id).notNull(),
 });
 
 // Schedule Table
-export const schedules = pgTable('schedules', {
-  id: serial('id').primaryKey(),
-  classId: integer('class_id').references(() => classes.id).notNull(),
-  teacherId: integer('teacher_id').references(() => teachers.id).notNull(),
-  subjectId: integer('subject_id').references(() => subjects.id).notNull(),
+export const schedules = mysqlTable('schedules', {
+  id: int('id').autoincrement().primaryKey(),
+  classId: int('class_id').references(() => classes.id).notNull(),
+  teacherId: int('teacher_id').references(() => teachers.id).notNull(),
+  subjectId: int('subject_id').references(() => subjects.id).notNull(),
   dayOfWeek: varchar('day_of_week', { length: 20 }).notNull(),
   startTime: varchar('start_time', { length: 10 }).notNull(),
   endTime: varchar('end_time', { length: 10 }).notNull(),
@@ -80,11 +80,11 @@ export const schedules = pgTable('schedules', {
 });
 
 // Assignments Table
-export const assignments = pgTable('assignments', {
-  id: serial('id').primaryKey(),
-  teacherId: integer('teacher_id').references(() => teachers.id).notNull(),
-  subjectId: integer('subject_id').references(() => subjects.id).notNull(),
-  classId: integer('class_id').references(() => classes.id).notNull(),
+export const assignments = mysqlTable('assignments', {
+  id: int('id').autoincrement().primaryKey(),
+  teacherId: int('teacher_id').references(() => teachers.id).notNull(),
+  subjectId: int('subject_id').references(() => subjects.id).notNull(),
+  classId: int('class_id').references(() => classes.id).notNull(),
   title: varchar('title', { length: 200 }).notNull(),
   description: text('description'),
   assignmentLink: text('assignment_link').notNull(),
@@ -93,21 +93,21 @@ export const assignments = pgTable('assignments', {
 });
 
 // Student Assignments (Tracking)
-export const studentAssignments = pgTable('student_assignments', {
-  id: serial('id').primaryKey(),
-  studentId: integer('student_id').references(() => students.id).notNull(),
-  assignmentId: integer('assignment_id').references(() => assignments.id).notNull(),
+export const studentAssignments = mysqlTable('student_assignments', {
+  id: int('id').autoincrement().primaryKey(),
+  studentId: int('student_id').references(() => students.id).notNull(),
+  assignmentId: int('assignment_id').references(() => assignments.id).notNull(),
   isSubmitted: boolean('is_submitted').default(false),
   submissionDate: timestamp('submission_date'),
   grade: decimal('grade', { precision: 5, scale: 2 }),
 });
 
 // Exams Table
-export const exams = pgTable('exams', {
-  id: serial('id').primaryKey(),
-  teacherId: integer('teacher_id').references(() => teachers.id).notNull(),
-  subjectId: integer('subject_id').references(() => subjects.id).notNull(),
-  classId: integer('class_id').references(() => classes.id).notNull(),
+export const exams = mysqlTable('exams', {
+  id: int('id').autoincrement().primaryKey(),
+  teacherId: int('teacher_id').references(() => teachers.id).notNull(),
+  subjectId: int('subject_id').references(() => subjects.id).notNull(),
+  classId: int('class_id').references(() => classes.id).notNull(),
   title: varchar('title', { length: 200 }).notNull(),
   description: text('description'),
   examLink: text('exam_link').notNull(),
@@ -117,32 +117,32 @@ export const exams = pgTable('exams', {
 });
 
 // Student Exams (Tracking)
-export const studentExams = pgTable('student_exams', {
-  id: serial('id').primaryKey(),
-  studentId: integer('student_id').references(() => students.id).notNull(),
-  examId: integer('exam_id').references(() => exams.id).notNull(),
+export const studentExams = mysqlTable('student_exams', {
+  id: int('id').autoincrement().primaryKey(),
+  studentId: int('student_id').references(() => students.id).notNull(),
+  examId: int('exam_id').references(() => exams.id).notNull(),
   isCompleted: boolean('is_completed').default(false),
   completionDate: timestamp('completion_date'),
   score: decimal('score', { precision: 5, scale: 2 }),
 });
 
 // Attendance Table
-export const attendance = pgTable('attendance', {
-  id: serial('id').primaryKey(),
-  studentId: integer('student_id').references(() => students.id).notNull(),
-  classId: integer('class_id').references(() => classes.id).notNull(),
+export const attendance = mysqlTable('attendance', {
+  id: int('id').autoincrement().primaryKey(),
+  studentId: int('student_id').references(() => students.id).notNull(),
+  classId: int('class_id').references(() => classes.id).notNull(),
   date: timestamp('date').notNull(),
   status: attendanceStatusEnum('status').notNull(),
   notes: text('notes'),
-  recordedBy: integer('recorded_by').references(() => teachers.id),
+  recordedBy: int('recorded_by').references(() => teachers.id),
   createdAt: timestamp('created_at').defaultNow(),
 });
 
 // Messages Table
-export const messages = pgTable('messages', {
-  id: serial('id').primaryKey(),
-  senderId: integer('sender_id').references(() => users.id).notNull(),
-  receiverId: integer('receiver_id').references(() => users.id).notNull(),
+export const messages = mysqlTable('messages', {
+  id: int('id').autoincrement().primaryKey(),
+  senderId: int('sender_id').references(() => users.id).notNull(),
+  receiverId: int('receiver_id').references(() => users.id).notNull(),
   subject: varchar('subject', { length: 200 }),
   content: text('content').notNull(),
   isRead: boolean('is_read').default(false),
@@ -150,9 +150,9 @@ export const messages = pgTable('messages', {
 });
 
 // Meetings Table
-export const meetings = pgTable('meetings', {
-  id: serial('id').primaryKey(),
-  createdBy: integer('created_by').references(() => users.id).notNull(),
+export const meetings = mysqlTable('meetings', {
+  id: int('id').autoincrement().primaryKey(),
+  createdBy: int('created_by').references(() => users.id).notNull(),
   title: varchar('title', { length: 200 }).notNull(),
   description: text('description'),
   meetingDate: timestamp('meeting_date').notNull(),
@@ -161,10 +161,10 @@ export const meetings = pgTable('meetings', {
 });
 
 // Meeting Attendees
-export const meetingAttendees = pgTable('meeting_attendees', {
-  id: serial('id').primaryKey(),
-  meetingId: integer('meeting_id').references(() => meetings.id).notNull(),
-  userId: integer('user_id').references(() => users.id).notNull(),
+export const meetingAttendees = mysqlTable('meeting_attendees', {
+  id: int('id').autoincrement().primaryKey(),
+  meetingId: int('meeting_id').references(() => meetings.id).notNull(),
+  userId: int('user_id').references(() => users.id).notNull(),
   isAttended: boolean('is_attended').default(false),
 });
 
